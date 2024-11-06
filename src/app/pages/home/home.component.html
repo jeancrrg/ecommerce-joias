@@ -1,0 +1,48 @@
+<toolbar-buttons></toolbar-buttons>
+<div class="divisor"></div>
+<menu-bar [listaMenuItens]="listaMenuItens"></menu-bar>
+
+<div class="card container-principal">
+    <div class="col-12 container-carrossel">
+        <p-carousel [value]="listaProdutos" [circular]="true">
+            <ng-template pTemplate="item">
+                <div class="col-12">
+                    <img src="assets/layout/images/aneis.png" class="imagem-carrossel"/>
+                </div>
+            </ng-template>
+        </p-carousel>
+    </div>
+
+    <div class="col-12 container-produtos">
+        <p-dataView [value]="listaProdutos" layout="grid">
+            <ng-template pTemplate="gridItem">
+                <div class="grid grid-nogutter">
+                    <div class="col-12 md:col-4" *ngFor="let produto of listaProdutos">
+
+                        <div class="card card-produto">
+                            <img [src]="'assets/demo/images/product/' + produto.image" [alt]="produto.name" class="imagem-produto"/>
+
+                            <div class="nome-produto">
+                                {{ produto.name }}
+                            </div>
+
+                            <div class="descricao-produto">
+                                {{ produto.description }}
+                            </div>
+
+                            <p-rating [ngModel]="produto.rating" class="avaliacao-produto" [readonly]="true" [cancel]="false"></p-rating>
+
+                            <span class="preco-produto">
+                                ${{ produto.price }}
+                            </span>
+
+                            <button pButton pRipple class="btn-adicionar" label="Adicionar" icon="pi pi-shopping-cart" (click)="adicionarAoCarrinho()"></button>
+                        </div>
+
+                    </div>
+                </div>
+            </ng-template>
+        </p-dataView>
+    </div>
+</div>
+
