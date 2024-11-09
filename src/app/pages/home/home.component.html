@@ -1,13 +1,13 @@
 <toolbar-buttons></toolbar-buttons>
 <div class="divisor"></div>
-<menu-bar [listaMenuItens]="listaMenuItens"></menu-bar>
+<menu-bar [listaMenuItens]="listaCategorias"></menu-bar>
 
 <div class="card container-principal">
     <div class="col-12 container-carrossel">
-        <p-carousel [value]="listaProdutos" [circular]="true">
-            <ng-template pTemplate="item">
+        <p-carousel [value]="listaNomesBarners" [circular]="true">
+            <ng-template let-nomeBarner pTemplate="item">
                 <div class="col-12">
-                    <img src="assets/layout/images/aneis.png" class="imagem-carrossel"/>
+                    <img src="assets/layout/images/barners/{{nomeBarner}}" class="imagem-carrossel"/>
                 </div>
             </ng-template>
         </p-carousel>
@@ -20,20 +20,16 @@
                     <div class="col-12 md:col-4" *ngFor="let produto of listaProdutos">
 
                         <div class="card card-produto">
-                            <img [src]="'assets/demo/images/product/' + produto.image" [alt]="produto.name" class="imagem-produto"/>
+                            <img [src]="produto.listaUrlImagensProduto[0]" [alt]="produto.nome" class="imagem-produto"/>
 
                             <div class="nome-produto">
-                                {{ produto.name }}
-                            </div>
-
-                            <div class="descricao-produto">
-                                {{ produto.description }}
+                                {{ produto.nome.length > 24 ? (produto.nome | slice:0:24) + '...' : produto.nome }}
                             </div>
 
                             <p-rating [ngModel]="produto.rating" class="avaliacao-produto" [readonly]="true" [cancel]="false"></p-rating>
 
                             <span class="preco-produto">
-                                ${{ produto.price }}
+                                {{ produto.preco | currency: 'BRL':true:'1.2-2' }}
                             </span>
 
                             <button pButton pRipple class="btn-adicionar" label="Adicionar" icon="pi pi-shopping-cart" (click)="adicionarAoCarrinho()"></button>

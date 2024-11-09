@@ -29,7 +29,7 @@ div.loading {
 
 .progress div.message {
     /* margin: 0 auto; */
-    color: #1eaafb;
+    color: var(--secundary-color);
     font-size: 3em;
     /*Ajustes para funcionar no android 4.4*/
     width: 100%;
@@ -61,8 +61,8 @@ div.loading {
     height: 128px !important;
     box-sizing: border-box;
     border: solid 2px transparent;
-    border-top-color: #1eaafb;
-    border-left-color: #1eaafb;
+    border-top-color: var(--secundary-color);
+    border-left-color: var(--secundary-color);
     border-radius: 50%;
     -webkit-animation: nprogress-spinner 1500ms linear infinite;
     animation: nprogress-spinner 1500ms linear infinite;

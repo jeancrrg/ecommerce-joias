@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { catchError, of, tap } from 'rxjs';
+import { NotificacaoService } from 'src/app/core/service/notificacao.service';
 import { Product } from 'src/app/demo/api/product';
 import { ProductService } from 'src/app/demo/service/product.service';
+import { ProdutoDTO } from 'src/app/shared/models/dto/ProdutoDTO.model';
+import { ProdutoService } from 'src/app/shared/services/produto.service';
 
 @Component({
     selector: 'app-home',
@@ -10,76 +14,102 @@ import { ProductService } from 'src/app/demo/service/product.service';
 })
 export class HomeComponent implements OnInit {
 
-    listaProdutos: Product[] = [];
+    listaCategorias: MenuItem[] = [];
+    listaNomesBarners: string[] = [];
+    listaProdutos: ProdutoDTO[] = [];
+
+    urlTeste: string = '';
+
+    listaProducts: Product[] = [];
     sortOrder: number = 0;
     sortField: string = '';
 
-    listaMenuItens: MenuItem[] = [];
+    constructor(
+        private notificacaoService: NotificacaoService,
+        private produtoService: ProdutoService,
 
-    constructor(private productService: ProductService) {
-
-    }
+        private productService: ProductService
+    ) {}
 
     ngOnInit(): void {
-        this.productService.getProducts().then(data => this.listaProdutos = data);
+        this.carregarCategoriasProdutos();
+        this.carregarBarners();
+        this.buscarProdutos(undefined, undefined);
 
-        this.listaMenuItens = [
+        this.productService.getProducts().then(data => this.listaProducts = data);
+    }
+
+    carregarBarners(): void {
+        this.listaNomesBarners = ['barner-blend-collection.png', 'barner-amanheci-15.png', 'barner-ametista.png'];
+    }
+
+    carregarCategoriasProdutos(): void {
+        this.listaCategorias = [
             {
                 label: 'Categorias',
                 icon: 'pi pi-fw pi-list',
                 items: [
                     {
-                        label: 'Acessórios',
-                        icon: 'pi pi-fw pi-plus',
-                        items: [
-                            {
-                                label: 'Anéis de prata',
-                                icon: 'pi pi-fw pi-plus'
-                            }
-                        ]
-                    },
-                    {
                         label: 'Anéis',
-                        icon: 'pi pi-fw pi-plus',
+                        icon: 'pi pi-fw pi-tag',
                         items: [
                             {
-                                label: 'Anéis de prata',
-                                icon: 'pi pi-fw pi-plus'
+                                label: 'Anéis de Prata',
+                                icon: 'pi pi-fw pi-bookmark'
+                            },
+                            {
+                                label: 'Anéis de Ouro',
+                                icon: 'pi pi-fw pi-bookmark'
+                            },
+                            {
+                                label: 'Anéis com Jóia',
+                                icon: 'pi pi-fw pi-bookmark'
                             }
                         ]
                     },
                     {
                         label: 'Brincos',
-                        icon: 'pi pi-fw pi-plus',
+                        icon: 'pi pi-fw pi-tag',
                         items: [
                             {
-                                label: 'Brincos de prata',
-                                icon: 'pi pi-fw pi-plus'
+                                label: 'Brincos de Prata',
+                                icon: 'pi pi-fw pi-bookmark'
+                            },
+                            {
+                                label: 'Brincos com Pedras',
+                                icon: 'pi pi-fw pi-bookmark'
+                            },
+                            {
+                                label: 'Brincos de Argola',
+                                icon: 'pi pi-fw pi-bookmark'
                             }
                         ]
                     },
                     {
                         label: 'Colares',
-                        icon: 'pi pi-fw pi-plus',
+                        icon: 'pi pi-fw pi-tag',
                         items: [
                             {
-                                label: 'Colares com pedra',
-                                icon: 'pi pi-fw pi-plus'
+                                label: 'Colares com Pedra',
+                                icon: 'pi pi-fw pi-bookmark'
                             },
                             {
-                                label: 'Colares de prata',
-                                icon: 'pi pi-fw pi-copy'
+                                label: 'Colares de Prata',
+                                icon: 'pi pi-fw pi-bookmark'
                             },
-
+                            {
+                                label: 'Pingentes',
+                                icon: 'pi pi-fw pi-bookmark'
+                            }
                         ]
                     },
                     {
                         label: 'Pulseiras',
-                        icon: 'pi pi-fw pi-plus',
+                        icon: 'pi pi-fw pi-tag',
                         items: [
                             {
-                                label: 'Pulseiras femininas',
-                                icon: 'pi pi-fw pi-plus'
+                                label: 'Pulseiras de Prata',
+                                icon: 'pi pi-fw pi-bookmark'
                             }
                         ]
                     }
@@ -93,12 +123,24 @@ export class HomeComponent implements OnInit {
                 label: 'Minha Conta',
                 icon: 'pi pi-fw pi-book',
             }
-        ]
+        ];
     }
 
     adicionarAoCarrinho(): void {
 
     }
 
+    buscarProdutos(codigo: number, nome: string): void {
+        this.listaProdutos = [];
+        this.produtoService.buscar(codigo, nome, true).pipe(
+            tap((response) => {
+                this.listaProdutos = [...response];
+            }),
+            catchError((error) => {
+                this.notificacaoService.erro(error.error, undefined, false, 10);
+                return of();
+            })
+        ).subscribe();
+    }
 
 }
