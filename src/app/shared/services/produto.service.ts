@@ -4,7 +4,6 @@ import { Observable } from "rxjs";
 import { ConfiguracaoAuxiliarService } from "src/app/core/service/configuracao.auxiliar.service";
 import { RequisicaoHttpService } from "src/app/core/service/requisicaoHttp.service";
 import { ValidationUtils } from "src/app/core/utils/ValidationUtils.util";
-import { Produto } from "../models/cadastro/Produto.model";
 import { ProdutoDTO } from "../models/dto/ProdutoDTO.model";
 
 @Injectable({

@@ -1,4 +1,6 @@
 .layout-toolbar {
+    border-bottom: 0.1rem solid var(--surface-0);
+
     .logo-toolbar {
         display: flex;
         align-items: center;
@@ -51,7 +53,7 @@
         }
 
         .margin-left {
-            margin-left: 60px;
+            margin-left: 90px;
         }
     }
 }

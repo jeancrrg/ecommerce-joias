@@ -1,10 +1,9 @@
-<toolbar-buttons></toolbar-buttons>
-<div class="divisor"></div>
-<menu-bar [listaMenuItens]="listaCategorias"></menu-bar>
+<header></header>
+<menu-bar></menu-bar>
 
 <div class="card container-principal">
     <div class="col-12 container-carrossel">
-        <p-carousel [value]="listaNomesBarners" [circular]="true">
+        <p-carousel [value]="listaNomesBarners" [circular]="true" [autoplayInterval]="10000">
             <ng-template let-nomeBarner pTemplate="item">
                 <div class="col-12">
                     <img src="assets/layout/images/barners/{{nomeBarner}}" class="imagem-carrossel"/>
@@ -22,17 +21,17 @@
                         <div class="card card-produto">
                             <img [src]="produto.listaUrlImagensProduto[0]" [alt]="produto.nome" class="imagem-produto"/>
 
-                            <div class="nome-produto">
-                                {{ produto.nome.length > 24 ? (produto.nome | slice:0:24) + '...' : produto.nome }}
+                            <div class="nome-produto" [pTooltip]="produto.nome">
+                                {{ produto.nome.length > 23 ? (produto.nome | slice:0:23) + '...' : produto.nome }}
                             </div>
 
-                            <p-rating [ngModel]="produto.rating" class="avaliacao-produto" [readonly]="true" [cancel]="false"></p-rating>
+                            <p-rating [ngModel]="produto.avaliacaoProduto" class="avaliacao-produto" [cancel]="false" />
 
                             <span class="preco-produto">
                                 {{ produto.preco | currency: 'BRL':true:'1.2-2' }}
                             </span>
 
-                            <button pButton pRipple class="btn-adicionar" label="Adicionar" icon="pi pi-shopping-cart" (click)="adicionarAoCarrinho()"></button>
+                            <button pButton pRipple class="btn-adicionar" label="Adicionar" icon="pi pi-shopping-cart" (click)="adicionarAoCarrinho(produto)"></button>
                         </div>
 
                     </div>

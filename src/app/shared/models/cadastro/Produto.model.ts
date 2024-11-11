@@ -18,4 +18,5 @@ export class Produto {
     preco: number;
     quantidadeEstoque: number;
     descricaoDetalhada: string;
+    avaliacao: number;
 }

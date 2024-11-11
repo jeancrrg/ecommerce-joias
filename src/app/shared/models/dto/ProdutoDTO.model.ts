@@ -5,4 +5,5 @@ export class ProdutoDTO {
     quantidadeEstoque: number;
     descricaoDetalhada: string;
     listaUrlImagensProduto: string[] = [];
+    avaliacao: number;
 }

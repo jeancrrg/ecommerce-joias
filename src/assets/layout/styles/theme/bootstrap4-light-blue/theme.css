@@ -1825,16 +1825,16 @@
     .p-rating .p-rating-item.p-focus {
         outline: 0 none;
         outline-offset: 0;
-        box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
-        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem #828AF5;
+        border-color: #828AF5;
     }
     .p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
-        color: #007bff;
+        color: #828AF5;
     }
     .p-rating:not(.p-disabled):not(.p-readonly)
         .p-rating-item:hover
         .p-rating-icon {
-        color: #007bff;
+        color: #828AF5;
     }
     .p-rating:not(.p-disabled):not(.p-readonly)
         .p-rating-item:hover
@@ -5720,10 +5720,11 @@
     }
 
     .p-menubar {
-        padding: 0.2rem 1rem;
+        padding: 0.2rem 5rem;
         background: var(--primary-color);
         color: var(--text-color);
         border: 0 none;
+        border-top: 0.1rem solid var(--surface-0);
     }
     .p-menubar .p-menubar-root-list {
         outline: 0 none;

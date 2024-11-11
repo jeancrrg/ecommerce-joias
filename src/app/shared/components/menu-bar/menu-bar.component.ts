@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { listaCategoriasProdutos } from '../../data/listaCategoriasProdutos';
 
 @Component({
     selector: 'menu-bar',
@@ -8,13 +9,12 @@ import { MenuItem } from 'primeng/api';
 })
 export class MenuBarComponent implements OnInit {
 
-    @Input()
     listaMenuItens: MenuItem[] = [];
 
     constructor() {}
 
     ngOnInit() {
-
+        this.listaMenuItens = listaCategoriasProdutos;
     }
 
 }
