@@ -7,6 +7,7 @@
     --secundary-color-text: #6c757d;
     --surface-0: #ffffff;
     --cor-cinza-claro: #f1f1f1;
+    --cor-roxo: #828AF5;
 
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
         Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
@@ -1825,16 +1826,16 @@
     .p-rating .p-rating-item.p-focus {
         outline: 0 none;
         outline-offset: 0;
-        box-shadow: 0 0 0 0.2rem #828AF5;
-        border-color: #828AF5;
+        box-shadow: 0 0 0 0.2rem var(--cor-roxo);
+        border-color: var(--cor-roxo);
     }
     .p-rating .p-rating-item.p-rating-item-active .p-rating-icon {
-        color: #828AF5;
+        color: var(--cor-roxo);
     }
     .p-rating:not(.p-disabled):not(.p-readonly)
         .p-rating-item:hover
         .p-rating-icon {
-        color: #828AF5;
+        color: var(--cor-roxo);
     }
     .p-rating:not(.p-disabled):not(.p-readonly)
         .p-rating-item:hover
@@ -2148,17 +2149,17 @@
     }
     .p-button.p-button-outlined {
         background-color: transparent;
-        color: #007bff;
+        color: var(--surface-500);
         border: 1px solid;
     }
     .p-button.p-button-outlined:not(:disabled):hover {
-        background: rgba(0, 123, 255, 0.04);
-        color: #007bff;
+        background: var(--surface-300);
+        color: var(--secundary-color);
         border: 1px solid;
     }
     .p-button.p-button-outlined:not(:disabled):active {
-        background: rgba(0, 123, 255, 0.16);
-        color: #007bff;
+        background: var(--surface-400);
+        color: var(--secundary-color);;
         border: 1px solid;
     }
     .p-button.p-button-outlined.p-button-plain {
@@ -2224,8 +2225,8 @@
         min-width: 1rem;
         height: 1rem;
         line-height: 1rem;
-        color: #007bff;
-        background-color: #ffffff;
+        color: var(--primary-color-text);
+        background-color: var(--surface-0);
     }
     .p-button.p-button-raised {
         box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
@@ -5103,11 +5104,12 @@
     }
 
     .p-breadcrumb {
-        background: #ffffff;
+        /*background: #ffffff;*/
         border: 0 none;
         border-radius: 4px;
-        padding: 1rem;
-        margin-bottom: 1rem;
+        padding: 2rem 2rem 1rem 2rem;
+        display: flex;
+        justify-content: center;
     }
 
     .p-breadcrumb .p-breadcrumb-list li .p-menuitem-link {
@@ -5118,26 +5120,29 @@
     .p-breadcrumb .p-breadcrumb-list li .p-menuitem-link:focus-visible {
         outline: 0 none;
         outline-offset: 0;
-        box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+        box-shadow: 0 0 0 0.2rem var(--gray-900);
     }
 
     .p-breadcrumb .p-breadcrumb-list li .p-menuitem-link .p-menuitem-text {
-        color: #6c757d;
+        color: var(--secundary-color-text);
     }
 
     .p-breadcrumb .p-breadcrumb-list li .p-menuitem-link .p-menuitem-icon {
-        color: #6c757d;
+        color: var(--secundary-color-text);
+        padding: 10px;
+    }
 
-    }
     .p-breadcrumb .p-breadcrumb-list li.p-menuitem-separator {
-        margin: 0 0.5rem 0 0.5rem;
-        color: #6c757d;
+        margin: 0 1.5rem;
+        color: var(--secundary-color-text);
     }
-    .p-breadcrumb .p-breadcrumb-list li:last-child .p-menuitem-text {
-        color: var(--primary-color);
+    .p-breadcrumb .p-breadcrumb-list li:first-child .p-menuitem-text {
+        color: var(--gray-900);
+        font-size: 17px;
     }
-    .p-breadcrumb .p-breadcrumb-list li:last-child .p-menuitem-icon {
-        color: var(--primary-color);
+    .p-breadcrumb .p-breadcrumb-list li:first-child .p-menuitem-icon {
+        color: var(--gray-900);
+        font-size: 17px;
     }
 
     .p-contextmenu {
@@ -6976,14 +6981,14 @@
         color: #002c5c;
     }
     .p-toast .p-toast-message.p-toast-message-success {
-        background: #6ff48f;
-        border: solid #6ff48f;
+        background: var(--secundary-color);
+        border: solid var(--secundary-color);
         border-width: 1px;
-        color: #155724;
+        color: var(--surface-0);
     }
     .p-toast .p-toast-message.p-toast-message-success .p-toast-message-icon,
     .p-toast .p-toast-message.p-toast-message-success .p-toast-icon-close {
-        color: #155724;
+        color: var(--surface-0);
     }
     .p-toast .p-toast-message.p-toast-message-warn {
         background: #f7d15a;

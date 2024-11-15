@@ -16,6 +16,8 @@ export class HomeComponent implements OnInit {
     listaNomesBarners: string[] = [];
     listaProdutos: ProdutoDTO[] = [];
 
+    quantidadeItensCarrinho: number = 0;
+
     constructor(
         private notificacaoService: NotificacaoService,
         private produtoService: ProdutoService,
@@ -43,6 +45,7 @@ export class HomeComponent implements OnInit {
     adicionarAoCarrinho(produtoDTO: ProdutoDTO): void {
         this.produtoCarrinhoService.adicionarProduto(produtoDTO.codigo, 1, 1, true).pipe(
             tap((response) => {
+                this.quantidadeItensCarrinho ++;
                 this.notificacaoService.sucesso('Produto adicionado ao carrinho com sucesso!', 'SUCESSO', false, undefined);
             }),
             catchError((error) => {

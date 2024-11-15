@@ -1,4 +1,4 @@
-<header></header>
+<header [quantidadeItensCarrinho]="quantidadeItensCarrinho"></header>
 <menu-bar></menu-bar>
 
 <div class="card container-principal">
@@ -13,19 +13,19 @@
     </div>
 
     <div class="col-12 container-produtos">
-        <p-dataView [value]="listaProdutos" layout="grid">
+        <p-dataView [value]="listaProdutos" layout="grid" emptyMessage="Nenhum produto encontrado.">
             <ng-template pTemplate="gridItem">
                 <div class="grid grid-nogutter">
                     <div class="col-12 md:col-4" *ngFor="let produto of listaProdutos">
 
                         <div class="card card-produto">
-                            <img [src]="produto.listaUrlImagensProduto[0]" [alt]="produto.nome" class="imagem-produto"/>
+                            <img [src]="produto.listaUrlImagens[0]" [alt]="produto.nome" class="imagem-produto"/>
 
                             <div class="nome-produto" [pTooltip]="produto.nome">
                                 {{ produto.nome.length > 23 ? (produto.nome | slice:0:23) + '...' : produto.nome }}
                             </div>
 
-                            <p-rating [ngModel]="produto.avaliacaoProduto" class="avaliacao-produto" [cancel]="false" />
+                            <p-rating [ngModel]="produto.avaliacaoProduto" class="avaliacao-produto" [readonly]="true" [cancel]="false" />
 
                             <span class="preco-produto">
                                 {{ produto.preco | currency: 'BRL':true:'1.2-2' }}

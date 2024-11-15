@@ -7,18 +7,22 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { RouterModule } from '@angular/router';
+import { BadgeModule } from 'primeng/badge';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [HeaderComponent],
     exports: [HeaderComponent],
     imports: [
         CommonModule,
+        FormsModule,
         ToolbarModule,
         InputGroupModule,
         InputGroupAddonModule,
         ButtonModule,
         RippleModule,
-        RouterModule
+        RouterModule,
+        BadgeModule,
     ]
 })
 export class HeaderModule {}
