@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { catchError, of, tap } from 'rxjs';
+import { ProdutoService } from './../../services/produto.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NotificacaoService } from 'src/app/core/service/notificacao.service';
+import { ProdutoDTO } from '../../models/dto/ProdutoDTO.model';
+import { ValidationUtils } from 'src/app/core/utils/ValidationUtils.util';
 
 @Component({
     selector: 'header',
@@ -7,13 +12,34 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-    @Input()
-    quantidadeItensCarrinho: number;
+    filtroNomeProduto: string;
+    listaProdutosDTO: ProdutoDTO[] = [];
 
-    constructor() {}
+    @Input() mostrarBarraPesquisa: boolean = true;
+    @Input() quantidadeItensCarrinho: number;
+    @Output() produtosPesquisados = new EventEmitter<ProdutoDTO[]>();
+
+    constructor(
+        private notificacaoService: NotificacaoService,
+        private produtoService: ProdutoService
+    ) {}
 
     ngOnInit(): void {}
 
-    pesquisar(): void {}
+    pesquisar(): void {
+        this.produtoService.buscar(undefined, this.filtroNomeProduto, true).pipe(
+            tap((response) => {
+                this.listaProdutosDTO = [...response];
+                this.produtosPesquisados.emit(this.listaProdutosDTO);
+                if (ValidationUtils.isEmpty(this.listaProdutosDTO) || this.listaProdutosDTO.length == 0) {
+                    this.notificacaoService.informacao('Nenhum produto encontrado!', 'INFORMAÇÃO', false, 10);
+                }
+            }),
+            catchError((error) => {
+                this.notificacaoService.erro(error.error, undefined, false, 10);
+                return of([]);
+            })
+        ).subscribe();
+    }
 
 }

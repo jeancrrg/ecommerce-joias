@@ -1,0 +1,94 @@
+<header [quantidadeItensCarrinho]="quantidadeProdutosCarrinho" [mostrarBarraPesquisa]="false"></header>
+<menu-bar></menu-bar>
+
+<div class="container-confirmacao-dados">
+    <p-breadcrumb [model]="itemsBreadCrumb"></p-breadcrumb>
+
+    <div class="grid p-fluid">
+        <div class="col-12 md:col-5">
+            <div class="card">
+                <div class="titulo">
+                    <h4> Dados Pessoais </h4>
+                </div>
+
+                <div class="info">
+                    <div class="grid">
+                        <label for="nome" class="col-12 md:col-2 label-info"> Nome: </label>
+                        <div class="col-12 md:col-8">
+                            <input id="nome" pInputText type="text" [(ngModel)]="nomeCliente" readonly/>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <label for="cpf" class="col-12 md:col-2 label-info"> Cpf: </label>
+                        <div class="col-12 md:col-8">
+                            <input id="cpf" pInputText type="text" [(ngModel)]="cpfCliente" readonly/>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <label for="email" class="col-12 md:col-2 label-info"> Email: </label>
+                        <div class="col-12 md:col-8">
+                            <input id="email" pInputText type="text" [(ngModel)]="emailCliente" readonly/>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <label for="telefone" class="col-12 md:col-2 label-info"> Telefone: </label>
+                        <div class="col-12 md:col-8">
+                            <input id="telefone" pInputText type="text" [(ngModel)]="telefoneCliente" readonly/>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-12 md:col-4">
+            <div class="card">
+                <div class="titulo">
+                    <h4> Entrega </h4>
+                </div>
+
+                <div class="info">
+                    <div class="grid">
+                        <label for="logradouro" class="col-12 md:col-2 label-info"> Rua/Av: </label>
+                        <div class="col-12 md:col-8">
+                            <input id="logradouro" pInputText type="text" [(ngModel)]="ruaCliente" readonly/>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <label for="numeroLogradouro" class="col-12 md:col-2 label-info"> Número: </label>
+                        <div class="col-12 md:col-8">
+                            <input id="numeroLogradouro" pInputText type="text" [(ngModel)]="numeroEnderecoCliente" readonly/>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <label for="cidade" class="col-12 md:col-2 label-info"> Cidade: </label>
+                        <div class="col-12 md:col-8">
+                            <input id="cidade" pInputText type="text" [(ngModel)]="cidadeCliente" readonly/>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <label for="estado" class="col-12 md:col-2 label-info"> Estado: </label>
+                        <div class="col-12 md:col-8">
+                            <input id="estado" pInputText type="text" [(ngModel)]="estadoCliente" readonly/>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <label for="cep" class="col-12 md:col-2 label-info"> CEP: </label>
+                        <div class="col-12 md:col-8">
+                            <input id="cep" pInputText type="text" [(ngModel)]="cepCliente" readonly/>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-12 md:col-3">
+            <resumo-compra
+                (onFinalizarCompra)="finalizarCompra()"
+                (onContinuarComprando)="voltarParaPaginaInicial()">
+            </resumo-compra>
+        </div>
+    </div>
+
+</div>

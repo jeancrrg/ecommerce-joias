@@ -1,4 +1,4 @@
-<header [quantidadeItensCarrinho]="listaProdutosCarrinhoDTO.length"></header>
+<header [quantidadeItensCarrinho]="listaProdutosCarrinhoDTO.length" [mostrarBarraPesquisa]="false"></header>
 <menu-bar></menu-bar>
 
 <div class="container-carrinho">
@@ -11,7 +11,7 @@
     <div class="grid p-fluid">
         <div class="col-12 md:col-9">
             <div class="card">
-                <p-dataView [value]="listaProdutosCarrinhoDTO">
+                <p-dataView [value]="listaProdutosCarrinhoDTO" emptyMessage="Seu carrinho está vazio.">
                     <ng-template pTemplate="list" let-listaProdutosCarrinhoDTO>
                         <div class="grid grid-nogutter">
 
@@ -33,6 +33,7 @@
                                     <div class="container-info-produto">
                                         <div class="container-descricao-produto">
                                             <div>
+                                                <i class="pi pi-tag icone-categoria"></i>
                                                 <span class="categoria-produto">
                                                     {{ produtoCarrinhoDTO.nomeCategoria }}
                                                 </span>
@@ -51,19 +52,19 @@
 
                                         <div class="container-atributos-produto">
                                             <p-inputGroup class="input-group w-full">
-                                                <button pButton pRipple icon="pi pi-plus-circle" (click)="adicionarQuantidadeProduto(produtoCarrinhoDTO)"></button>
+                                                <button pButton pRipple icon="pi pi-minus-circle" (click)="removerQuantidadeProduto(produtoCarrinhoDTO)"></button>
 
                                                 <input type="text" pInputText [(ngModel)]="produtoCarrinhoDTO.quantidadeProduto" maxlength="10"
                                                             onkeypress="return event.charCode >= 48 && event.charCode <= 57" >
 
-                                                <button pButton pRipple icon="pi pi-minus-circle" (click)="removerQuantidadeProduto(produtoCarrinhoDTO)"></button>
+                                                <button pButton pRipple icon="pi pi-plus-circle" (click)="adicionarQuantidadeProduto(produtoCarrinhoDTO)"></button>
                                             </p-inputGroup>
 
                                             <span class="preco-produto">
-                                                {{ produtoCarrinhoDTO.preco  | currency: 'BRL':true:'1.2-2' }}
+                                                {{ produtoCarrinhoDTO.valorSubtotalProduto  | currency: 'BRL':true:'1.2-2' }}
                                             </span>
 
-                                            <p-button icon="pi pi-trash" class="btn-remover" [outlined]="true" />
+                                            <p-button icon="pi pi-trash" class="btn-remover" [outlined]="true" (click)="removerProdutoCarrinho(produtoCarrinhoDTO)"></p-button>
                                         </div>
                                     </div>
                                 </div>
@@ -76,32 +77,12 @@
         </div>
 
         <div class="col-12 md:col-3">
-            <div class="card">
-                <div class="resumo-compra">
-                    <div class="label-resumo-compra">
-                        <h4> Resumo da Compra </h4>
-                    </div>
-
-                    <div class="subtotal linha-resumo">
-                        <span> Subtotal </span>
-                        <span>
-                            {{ valorTotalCarrinho | currency: 'BRL':true:'1.2-2' }}
-                        </span>
-                    </div>
-
-                    <div class="total linha-resumo">
-                        <span> Total </span>
-                        <span>
-                            {{ valorTotalCarrinho | currency: 'BRL':true:'1.2-2' }}
-                        </span>
-                    </div>
-
-                    <div class="btn-resumo">
-                        <button pButton pRipple label="Finalizar Compra" icon="pi pi-shopping-cart" (click)="finalizarCompra()"></button>
-                        <button pButton pRipple label="Continuar Comprando" icon="pi pi-arrow-left" (click)="voltarParaPaginaInicial()"></button>
-                    </div>
-                </div>
-            </div>
+            <resumo-compra
+                labelBotaoPrimario="IR PARA CONFIRMAÇÃO"
+                labelBotaoSecundario="CONTINUAR COMPRANDO"
+                (onFinalizarCompra)="finalizarCompra()"
+                (onContinuarComprando)="voltarParaPaginaInicial()">
+            </resumo-compra>
         </div>
     </div>
 </div>

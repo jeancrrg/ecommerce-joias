@@ -7,16 +7,17 @@ import { ProdutoService } from 'src/app/shared/services/produto.service';
 import { ProdutoCarrinhoService } from 'src/app/shared/services/produtoCarrinho.service';
 
 @Component({
-    selector: 'app-home',
+    selector: 'home',
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
 
     listaNomesBarners: string[] = [];
-    listaProdutos: ProdutoDTO[] = [];
+    listaProdutosDTO: ProdutoDTO[] = [];
+    quantidadeProdutosCarrinho: number;
 
-    quantidadeItensCarrinho: number = 0;
+    codigoCliente: number = 1;
 
     constructor(
         private notificacaoService: NotificacaoService,
@@ -27,13 +28,30 @@ export class HomeComponent implements OnInit {
     ngOnInit(): void {
         this.listaNomesBarners = listaBarnersProdutos;
         this.buscarProdutos(undefined, undefined);
+        this.atualizarQuantidadeProdutosCarrinho();
     }
 
     buscarProdutos(codigo: number, nome: string): void {
-        this.listaProdutos = [];
+        this.listaProdutosDTO = [];
         this.produtoService.buscar(codigo, nome, true).pipe(
             tap((response) => {
-                this.listaProdutos = [...response];
+                this.listaProdutosDTO = [...response];
+            }),
+            catchError((error) => {
+                this.notificacaoService.erro(error.error, undefined, false, 10);
+                return of();
+            })
+        ).subscribe();
+    }
+
+    receberProdutos(lista: ProdutoDTO[]): void {
+        this.listaProdutosDTO = lista;
+    }
+
+    atualizarQuantidadeProdutosCarrinho(): void {
+        this.produtoCarrinhoService.buscarQuantidadeProdutosCarrinho(this.codigoCliente, true).pipe(
+            tap((response) => {
+                this.quantidadeProdutosCarrinho = response;
             }),
             catchError((error) => {
                 this.notificacaoService.erro(error.error, undefined, false, 10);
@@ -43,9 +61,10 @@ export class HomeComponent implements OnInit {
     }
 
     adicionarAoCarrinho(produtoDTO: ProdutoDTO): void {
-        this.produtoCarrinhoService.adicionarProduto(produtoDTO.codigo, 1, 1, true).pipe(
+        const quantidadeParaAdicionar: number = 1;
+        this.produtoCarrinhoService.adicionar(produtoDTO.codigo, quantidadeParaAdicionar, this.codigoCliente, true).pipe(
             tap((response) => {
-                this.quantidadeItensCarrinho ++;
+                this.quantidadeProdutosCarrinho ++;
                 this.notificacaoService.sucesso('Produto adicionado ao carrinho com sucesso!', 'SUCESSO', false, undefined);
             }),
             catchError((error) => {

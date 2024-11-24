@@ -1,5 +1,5 @@
 import { Produto } from "../cadastro/Produto.model";
-import { Cliente } from "../pedido/Cliente.model";
+import { Cliente } from "./Cliente.model";
 
 export class ProdutoCarrinhoId {
     cliente: Cliente;

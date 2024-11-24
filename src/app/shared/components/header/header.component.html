@@ -5,9 +5,9 @@
         </a>
     </div>
 
-    <div class="p-toolbar-group-center search">
+    <div class="p-toolbar-group-center search" *ngIf="mostrarBarraPesquisa">
         <p-inputGroup class="input-toolbar">
-            <input type="text" pInputText class="p-inputtext" placeholder="Pesquise em toda loja..." />
+            <input type="text" pInputText [(ngModel)]="filtroNomeProduto" class="p-inputtext" placeholder="Pesquise em toda loja..." uppercase maxlength="100" (keyup.enter)="pesquisar()">
             <button pButton pRipple icon="pi pi-search" (click)="pesquisar()"></button>
         </p-inputGroup>
     </div>

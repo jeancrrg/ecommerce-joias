@@ -1,0 +1,31 @@
+<div class="card resumo-compra">
+    <div class="label-resumo-compra">
+        <h4> Resumo da Compra </h4>
+    </div>
+
+    <div class="subtotal linha-resumo">
+        <span> Subtotal </span>
+        <span>
+            {{ valorTotalCarrinho | currency: 'BRL':true:'1.2-2' }}
+        </span>
+    </div>
+
+    <div class="frete linha-resumo">
+        <span> Frete </span>
+        <span>
+            {{ valorFrete | currency: 'BRL':true:'1.2-2' }}
+        </span>
+    </div>
+
+    <div class="total linha-resumo">
+        <span> Total </span>
+        <span>
+            {{ valorTotalCarrinho | currency: 'BRL':true:'1.2-2' }}
+        </span>
+    </div>
+
+    <div class="btn-resumo">
+        <button pButton pRipple [label]="labelBotaoPrimario" icon="pi pi-check-circle" (click)="finalizarCompra()"></button>
+        <button pButton pRipple [label]="labelBotaoSecundario" class="btn-continuar-comprando" icon="pi pi-shopping-bag" (click)="continuarComprando()"></button>
+    </div>
+</div>

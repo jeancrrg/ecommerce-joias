@@ -19,10 +19,22 @@ export class ProdutoCarrinhoService {
     buscar(codigoCliente: number, loader: boolean): Observable<ProdutoCarrinhoDTO[]> {
         let parametros: HttpParams = new HttpParams();
         parametros = parametros.append('codigoCliente', codigoCliente + '');
-        return this.requisicaoHttpService.Get<ProdutoCarrinhoDTO[]>(this.configuracaoAuxiliarService.getContextoSistema() + 'produtos-carrinho', {params: parametros}, loader, false, false);
+        return this.requisicaoHttpService.Get<ProdutoCarrinhoDTO[]>(this.configuracaoAuxiliarService.getContextoSistema() + 'produtos-carrinho', {params: parametros}, loader);
     }
 
-    adicionarProduto(codigoProduto: number, quantidade: number, codigoCliente: number, loader: boolean): Observable<void> {
+    buscarQuantidadeProdutosCarrinho(codigoCliente: number, loader: boolean): Observable<number> {
+        let parametros: HttpParams = new HttpParams();
+        parametros = parametros.append('codigoCliente', codigoCliente + '');
+        return this.requisicaoHttpService.Get<number>(this.configuracaoAuxiliarService.getContextoSistema() + 'produtos-carrinho/quantidade', {params: parametros}, loader);
+    }
+
+    atualizar(codigoCliente: number, listaProdutosCarrinhoDTO: ProdutoCarrinhoDTO[], loader: boolean): Observable<ProdutoCarrinhoDTO[]> {
+        let parametros: HttpParams = new HttpParams();
+        parametros = parametros.append('codigoCliente', codigoCliente + '');
+        return this.requisicaoHttpService.Put<ProdutoCarrinhoDTO[]>(this.configuracaoAuxiliarService.getContextoSistema() + 'produtos-carrinho', listaProdutosCarrinhoDTO, {params: parametros}, loader);
+    }
+
+    adicionar(codigoProduto: number, quantidade: number, codigoCliente: number, loader: boolean): Observable<void> {
         let parametros: HttpParams = new HttpParams();
         if (ValidationUtils.isNotEmpty(codigoProduto)) {
             parametros = parametros.append('codigoProduto', codigoProduto + '');
@@ -33,7 +45,20 @@ export class ProdutoCarrinhoService {
         if (ValidationUtils.isNotEmpty(codigoCliente)) {
             parametros = parametros.append('codigoCliente', codigoCliente + '');
         }
-        return this.requisicaoHttpService.Post<void>(this.configuracaoAuxiliarService.getContextoSistema() + 'produtos-carrinho', undefined, {params: parametros}, loader, false, false);
+        return this.requisicaoHttpService.Post<void>(this.configuracaoAuxiliarService.getContextoSistema() + 'produtos-carrinho', undefined, {params: parametros}, loader);
     }
+
+    remover(codigoProduto: number, codigoCliente: number, loader: boolean): Observable<void> {
+        let parametros: HttpParams = new HttpParams();
+        if (ValidationUtils.isNotEmpty(codigoProduto)) {
+            parametros = parametros.append('codigoProduto', codigoProduto + '');
+        }
+        if (ValidationUtils.isNotEmpty(codigoCliente)) {
+            parametros = parametros.append('codigoCliente', codigoCliente + '');
+        }
+        return this.requisicaoHttpService.Delete<void>(this.configuracaoAuxiliarService.getContextoSistema() + 'produtos-carrinho', {params: parametros}, loader);
+    }
+
+
 
 }

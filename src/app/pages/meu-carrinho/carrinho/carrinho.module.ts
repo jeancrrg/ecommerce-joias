@@ -12,22 +12,23 @@ import { DataViewModule } from "primeng/dataview";
 import { InputGroupModule } from "primeng/inputgroup";
 import { InputGroupAddonModule } from "primeng/inputgroupaddon";
 import { FormsModule } from "@angular/forms";
+import { ResumoCompraModule } from "../../../shared/components/resumo-compra/resumo-compra.module";
 
 @NgModule({
     declarations: [CarrinhoComponent],
     imports: [
-        CommonModule,
-        FormsModule,
-        HeaderModule,
-        RouterModule.forChild(CarrinhoRoutes),
-        ButtonModule,
-        RippleModule,
-        HeaderModule,
-        MenuBarModule,
-        BreadcrumbModule,
-        DataViewModule,
-        InputGroupModule,
-        InputGroupAddonModule,
-    ]
+    CommonModule,
+    FormsModule,
+    HeaderModule,
+    RouterModule.forChild(CarrinhoRoutes),
+    ButtonModule,
+    RippleModule,
+    MenuBarModule,
+    BreadcrumbModule,
+    DataViewModule,
+    InputGroupModule,
+    InputGroupAddonModule,
+    ResumoCompraModule
+]
 })
 export class CarrinhoModule {}

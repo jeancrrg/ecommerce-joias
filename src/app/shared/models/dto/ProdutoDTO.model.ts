@@ -6,4 +6,5 @@ export class ProdutoDTO {
     descricaoDetalhada: string;
     listaUrlImagens: string[] = [];
     avaliacaoProduto: number;
+    nomeCategoria: string;
 }

@@ -1,4 +1,4 @@
-<header [quantidadeItensCarrinho]="quantidadeItensCarrinho"></header>
+<header [quantidadeItensCarrinho]="quantidadeProdutosCarrinho" (produtosPesquisados)="receberProdutos($event)"></header>
 <menu-bar></menu-bar>
 
 <div class="card container-principal">
@@ -13,25 +13,32 @@
     </div>
 
     <div class="col-12 container-produtos">
-        <p-dataView [value]="listaProdutos" layout="grid" emptyMessage="Nenhum produto encontrado.">
+        <p-dataView [value]="listaProdutosDTO" layout="grid" emptyMessage="Nenhum produto encontrado.">
             <ng-template pTemplate="gridItem">
                 <div class="grid grid-nogutter">
-                    <div class="col-12 md:col-4" *ngFor="let produto of listaProdutos">
+                    <div class="col-12 md:col-4" *ngFor="let produtoDTO of listaProdutosDTO">
 
                         <div class="card card-produto">
-                            <img [src]="produto.listaUrlImagens[0]" [alt]="produto.nome" class="imagem-produto"/>
+                            <img [src]="produtoDTO.listaUrlImagens[0]" [alt]="produtoDTO.nome" class="imagem-produto"/>
 
-                            <div class="nome-produto" [pTooltip]="produto.nome">
-                                {{ produto.nome.length > 23 ? (produto.nome | slice:0:23) + '...' : produto.nome }}
+                            <div class="nome-produto" [pTooltip]="produtoDTO.nome">
+                                {{ produtoDTO.nome.length > 23 ? (produtoDTO.nome | slice:0:23) + '...' : produtoDTO.nome }}
                             </div>
 
-                            <p-rating [ngModel]="produto.avaliacaoProduto" class="avaliacao-produto" [readonly]="true" [cancel]="false" />
+                            <div class="categoria-produto">
+                                <i class="pi pi-tag"></i>
+                                <span>
+                                    {{ produtoDTO.nomeCategoria }}
+                                </span>
+                            </div>
+
+                            <p-rating [ngModel]="produtoDTO.avaliacaoProduto" class="avaliacao-produto" [readonly]="true" [cancel]="false" />
 
                             <span class="preco-produto">
-                                {{ produto.preco | currency: 'BRL':true:'1.2-2' }}
+                                {{ produtoDTO.preco | currency: 'BRL':true:'1.2-2' }}
                             </span>
 
-                            <button pButton pRipple class="btn-adicionar" label="Adicionar" icon="pi pi-shopping-cart" (click)="adicionarAoCarrinho(produto)"></button>
+                            <button pButton pRipple class="btn-adicionar" label="Adicionar" icon="pi pi-shopping-cart" (click)="adicionarAoCarrinho(produtoDTO)"></button>
                         </div>
 
                     </div>

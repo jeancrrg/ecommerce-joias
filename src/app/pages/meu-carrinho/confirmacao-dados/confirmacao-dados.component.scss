@@ -1,0 +1,23 @@
+.container-confirmacao-dados {
+    margin: 0 6rem;
+
+    .titulo {
+        text-align: center;
+        margin: 1rem 0;
+        font-family: var(--font-primary);
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-color: var(--surface-border);
+    }
+
+    .info {
+        padding: 1.3rem;
+
+        .label-info {
+            display: flex;
+            align-items: center;
+        }
+
+    }
+
+}

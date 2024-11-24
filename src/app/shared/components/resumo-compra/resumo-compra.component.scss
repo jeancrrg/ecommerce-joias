@@ -1,0 +1,57 @@
+.resumo-compra {
+
+    .label-resumo-compra {
+        text-align: center;
+        margin: 1rem 0;
+        font-family: var(--font-primary);
+    }
+
+    .subtotal {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .frete {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .total {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .linha-resumo {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-color: var(--surface-border);
+        padding: 1.5rem 1.3rem;
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    .btn-resumo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1.5rem 1rem;
+        gap: 1.5rem;
+
+        .btn-continuar-comprando {
+            background-color: var(--surface-0);
+            color: var(--secundary-color);
+
+            &:hover {
+                background-color: var(--surface-300);
+                border-color: var(--surface-500);
+            }
+        }
+
+        button {
+            padding: 0.8rem 2.3rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+    }
+
+}

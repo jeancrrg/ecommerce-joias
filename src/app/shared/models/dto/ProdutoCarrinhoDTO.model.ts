@@ -9,4 +9,5 @@ export class ProdutoCarrinhoDTO {
     quantidadeProduto: number;
     valorSubtotalProduto: number;
     valorTotalCarrinho: number;
+    codigoCliente: number;
 }

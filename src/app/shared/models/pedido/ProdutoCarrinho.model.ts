@@ -1,4 +1,4 @@
-import { ProdutoCarrinhoId } from "../embeddableid/ProdutoCarrinhoId.model";
+import { ProdutoCarrinhoId } from "./ProdutoCarrinhoId.model";
 
 export class ProdutoCarrinho {
     produtoCarrinhoId: ProdutoCarrinhoId;
