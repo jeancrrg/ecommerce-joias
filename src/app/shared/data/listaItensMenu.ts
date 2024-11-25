@@ -1,6 +1,6 @@
 import { MenuItem } from "primeng/api";
 
-export const listaCategoriasProdutos: MenuItem[] = [
+export const listaItensMenu: MenuItem[] = [
     {
         label: 'Categorias',
         icon: 'pi pi-fw pi-list',
@@ -74,6 +74,7 @@ export const listaCategoriasProdutos: MenuItem[] = [
     {
         label: 'Meus Pedidos',
         icon: 'pi pi-fw pi-shopping-bag',
+        routerLink: '/pedidos'
     },
     {
         label: 'Minha Conta',

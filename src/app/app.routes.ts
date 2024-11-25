@@ -7,7 +7,8 @@ export const AppRotas: Routes = [
         children: [
             { path: '', loadChildren: () => import('./pages/home/home.module').then(module => module.HomeModule) },
             { path: 'carrinho', loadChildren: () => import('./pages/meu-carrinho/carrinho/carrinho.module').then(module => module.CarrinhoModule) },
-            { path: 'confirmacao-dados', loadChildren: () => import('./pages/meu-carrinho/confirmacao-dados/confirmacao-dados.module').then(module => module.ConfirmacaoDadosModule) }
+            { path: 'confirmacao-dados', loadChildren: () => import('./pages/meu-carrinho/confirmacao-dados/confirmacao-dados.module').then(module => module.ConfirmacaoDadosModule) },
+            { path: 'pedidos', loadChildren: () => import('./pages/meus-pedidos/pedido/pedido.module').then(module => module.PedidoModule) }
         ]
     },
     { path: '**', redirectTo: '/notfound' }

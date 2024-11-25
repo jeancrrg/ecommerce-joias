@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { listaCategoriasProdutos } from '../../data/listaCategoriasProdutos';
+import { listaItensMenu } from '../../data/listaItensMenu';
 
 @Component({
     selector: 'menu-bar',
@@ -14,7 +14,7 @@ export class MenuBarComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {
-        this.listaMenuItens = listaCategoriasProdutos;
+        this.listaMenuItens = listaItensMenu;
     }
 
 }

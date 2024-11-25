@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { catchError, of, tap } from 'rxjs';
 import { NotificacaoService } from 'src/app/core/service/notificacao.service';
 import { listaBarnersProdutos } from 'src/app/shared/data/listaBarnersProdutos';
+import { ProdutoCarrinhoDTO } from 'src/app/shared/models/dto/ProdutoCarrinhoDTO.model';
 import { ProdutoDTO } from 'src/app/shared/models/dto/ProdutoDTO.model';
 import { ProdutoService } from 'src/app/shared/services/produto.service';
 import { ProdutoCarrinhoService } from 'src/app/shared/services/produtoCarrinho.service';
@@ -15,8 +16,8 @@ export class HomeComponent implements OnInit {
 
     listaNomesBarners: string[] = [];
     listaProdutosDTO: ProdutoDTO[] = [];
-    quantidadeProdutosCarrinho: number;
-
+    quantidadeProdutos: number = 0;
+    listaProdutosCarrinhoDTO: ProdutoCarrinhoDTO[] = [];
     codigoCliente: number = 1;
 
     constructor(
@@ -25,10 +26,11 @@ export class HomeComponent implements OnInit {
         private produtoCarrinhoService: ProdutoCarrinhoService
     ) {}
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
         this.listaNomesBarners = listaBarnersProdutos;
         this.buscarProdutos(undefined, undefined);
-        this.atualizarQuantidadeProdutosCarrinho();
+        await this.buscarProdutosCarrinho(this.codigoCliente);
+        this.quantidadeProdutos = this.listaProdutosCarrinhoDTO.length;
     }
 
     buscarProdutos(codigo: number, nome: string): void {
@@ -44,27 +46,36 @@ export class HomeComponent implements OnInit {
         ).subscribe();
     }
 
-    receberProdutos(lista: ProdutoDTO[]): void {
-        this.listaProdutosDTO = lista;
+    async buscarProdutosCarrinho(codigoCliente: number): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            this.produtoCarrinhoService.buscar(codigoCliente, true).pipe(
+                tap((response) => {
+                    this.listaProdutosCarrinhoDTO = [...response];
+                }),
+                catchError((error) => {
+                    this.notificacaoService.erro(error.error, undefined, false, 10);
+                    return of();
+                })
+            ).subscribe({
+                next: () => resolve(),
+                error: (erro) => reject(erro)
+            });
+        });
     }
 
-    atualizarQuantidadeProdutosCarrinho(): void {
-        this.produtoCarrinhoService.buscarQuantidadeProdutosCarrinho(this.codigoCliente, true).pipe(
-            tap((response) => {
-                this.quantidadeProdutosCarrinho = response;
-            }),
-            catchError((error) => {
-                this.notificacaoService.erro(error.error, undefined, false, 10);
-                return of();
-            })
-        ).subscribe();
+    receberProdutosPesquisados(listaProdutos: ProdutoDTO[]): void {
+        this.listaProdutosDTO = listaProdutos;
     }
 
     adicionarAoCarrinho(produtoDTO: ProdutoDTO): void {
         const quantidadeParaAdicionar: number = 1;
-        this.produtoCarrinhoService.adicionar(produtoDTO.codigo, quantidadeParaAdicionar, this.codigoCliente, true).pipe(
+        this.adicionar(produtoDTO.codigo, quantidadeParaAdicionar, this.codigoCliente);
+        this.quantidadeProdutos++;
+    }
+
+    adicionar(codigoProduto: number, quantidade: number, codigoCliente: number): void {
+        this.produtoCarrinhoService.adicionar(codigoProduto, quantidade, codigoCliente, true).pipe(
             tap((response) => {
-                this.quantidadeProdutosCarrinho ++;
                 this.notificacaoService.sucesso('Produto adicionado ao carrinho com sucesso!', 'SUCESSO', false, undefined);
             }),
             catchError((error) => {

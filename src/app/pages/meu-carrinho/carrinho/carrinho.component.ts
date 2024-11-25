@@ -64,20 +64,20 @@ export class CarrinhoComponent implements OnInit, OnDestroy {
     adicionarQuantidadeProduto(produtoCarrinhoDTO: ProdutoCarrinhoDTO): void {
         produtoCarrinhoDTO.quantidadeProduto ++;
         produtoCarrinhoDTO.valorSubtotalProduto = produtoCarrinhoDTO.preco * produtoCarrinhoDTO.quantidadeProduto;
-        this.componenteResumoCompra.atualizarResumoCompra();
+        this.componenteResumoCompra.atualizarResumoCompra(this.listaProdutosCarrinhoDTO);
     }
 
     removerQuantidadeProduto(produtoCarrinhoDTO: ProdutoCarrinhoDTO): void {
         if (produtoCarrinhoDTO.quantidadeProduto > 1) {
             produtoCarrinhoDTO.quantidadeProduto --;
             produtoCarrinhoDTO.valorSubtotalProduto = produtoCarrinhoDTO.preco * produtoCarrinhoDTO.quantidadeProduto;
-            this.componenteResumoCompra.atualizarResumoCompra();
+            this.componenteResumoCompra.atualizarResumoCompra(this.listaProdutosCarrinhoDTO);
         }
     }
 
     async removerProdutoCarrinho(produtoCarrinhoDTO: ProdutoCarrinhoDTO): Promise<void> {
         await this.removerProduto(produtoCarrinhoDTO.codigo, produtoCarrinhoDTO.codigoCliente);
-        this.componenteResumoCompra.atualizarResumoCompra();
+        this.componenteResumoCompra.atualizarResumoCompra(this.listaProdutosCarrinhoDTO);
     }
 
     async removerProduto(codigoProduto: number, codigoCliente: number): Promise<void> {

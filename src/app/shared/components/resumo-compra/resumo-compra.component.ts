@@ -30,7 +30,7 @@ export class ResumoCompraComponent implements OnInit {
 
     async ngOnInit(): Promise<void> {
         await this.buscarProdutosCarrinho(this.codigoCliente);
-        this.atualizarResumoCompra();
+        this.atualizarResumoCompra(this.listaProdutosCarrinhoDTO);
     }
 
     async buscarProdutosCarrinho(codigoCliente: number): Promise<void> {
@@ -59,16 +59,16 @@ export class ResumoCompraComponent implements OnInit {
         this.onContinuarComprando.emit();
     }
 
-    atualizarResumoCompra(): void {
-        if (ValidationUtils.isNotEmpty(this.listaProdutosCarrinhoDTO) && this.listaProdutosCarrinhoDTO.length > 0) {
-            this.valorTotalCarrinho = this.calcularTotalCarrinho();
+    atualizarResumoCompra(listaProdutos: ProdutoCarrinhoDTO[]): void {
+        if (ValidationUtils.isNotEmpty(listaProdutos) && listaProdutos.length > 0) {
+            this.valorTotalCarrinho = this.calcularTotalCarrinho(listaProdutos);
         } else {
             this.valorTotalCarrinho = 0;
         }
     }
 
-    calcularTotalCarrinho(): number {
-        return this.listaProdutosCarrinhoDTO.reduce((total, produto) => {
+    calcularTotalCarrinho(listaProdutos: ProdutoCarrinhoDTO[]): number {
+        return listaProdutos.reduce((total, produto) => {
             return total + (produto.preco * produto.quantidadeProduto);
         }, 0);
     }

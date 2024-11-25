@@ -1,5 +1,42 @@
+/*
+    BreadCrumb
+*/
+/* Ícone */
+:host ::ng-deep .p-breadcrumb .p-breadcrumb-list li .p-menuitem-link .p-menuitem-icon {
+    color: var(--gray-900);
+    font-size: 1.3rem;
+}
+
+/* Texto */
+:host ::ng-deep .p-breadcrumb .p-breadcrumb-list li .p-menuitem-link .p-menuitem-text {
+    color: var(--gray-900);
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+/* Separador */
+:host ::ng-deep .p-breadcrumb .p-breadcrumb-list li.p-menuitem-separator {
+    color: var(--secundary-color-text);
+}
+
+/* Primeiro ícone */
+:host ::ng-deep .p-breadcrumb .p-breadcrumb-list li:first-child .p-menuitem-icon {
+    color: var(--secundary-color-text);
+    font-size: 1.2rem;
+}
+
+/* Primeiro texto */
+:host ::ng-deep .p-breadcrumb .p-breadcrumb-list li:first-child .p-menuitem-text {
+    color: var(--secundary-color-text);
+    font-size: 1.2rem;
+}
+
 .container-confirmacao-dados {
     margin: 0 6rem;
+
+    .label-confirmacao {
+        font-family: 'Times New Roman', Times, serif;
+    }
 
     .titulo {
         text-align: center;
@@ -17,7 +54,6 @@
             display: flex;
             align-items: center;
         }
-
     }
 
 }

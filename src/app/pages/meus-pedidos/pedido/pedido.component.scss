@@ -1,0 +1,17 @@
+.container-pedidos {
+    margin: 2rem 6rem;
+
+    .label-pedidos {
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .titulo {
+        text-align: center;
+        margin: 1rem 0;
+        font-family: var(--font-primary);
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-color: var(--surface-border);
+    }
+
+}

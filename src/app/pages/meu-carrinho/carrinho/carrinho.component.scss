@@ -1,3 +1,36 @@
+/*
+    BreadCrumb
+*/
+/* Ícone */
+:host ::ng-deep .p-breadcrumb .p-breadcrumb-list li .p-menuitem-link .p-menuitem-icon {
+    color: var(--secundary-color);
+    font-size: 1.2rem;
+}
+
+/* Texto */
+:host ::ng-deep .p-breadcrumb .p-breadcrumb-list li .p-menuitem-link .p-menuitem-text {
+    color: var(--secundary-color);
+    font-size: 1.2rem;
+}
+
+/* Separador */
+:host ::ng-deep .p-breadcrumb .p-breadcrumb-list li.p-menuitem-separator {
+    color: var(--gray-900);
+}
+
+/* Primeiro ícone */
+:host ::ng-deep .p-breadcrumb .p-breadcrumb-list li:first-child .p-menuitem-icon {
+    color: var(--gray-900);
+    font-size: 1.3rem;
+}
+
+/* Primeiro texto */
+:host ::ng-deep .p-breadcrumb .p-breadcrumb-list li:first-child .p-menuitem-text {
+    color: var(--gray-900);
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
 .container-carrinho {
     margin: 0 6rem;
 

@@ -22,12 +22,6 @@ export class ProdutoCarrinhoService {
         return this.requisicaoHttpService.Get<ProdutoCarrinhoDTO[]>(this.configuracaoAuxiliarService.getContextoSistema() + 'produtos-carrinho', {params: parametros}, loader);
     }
 
-    buscarQuantidadeProdutosCarrinho(codigoCliente: number, loader: boolean): Observable<number> {
-        let parametros: HttpParams = new HttpParams();
-        parametros = parametros.append('codigoCliente', codigoCliente + '');
-        return this.requisicaoHttpService.Get<number>(this.configuracaoAuxiliarService.getContextoSistema() + 'produtos-carrinho/quantidade', {params: parametros}, loader);
-    }
-
     atualizar(codigoCliente: number, listaProdutosCarrinhoDTO: ProdutoCarrinhoDTO[], loader: boolean): Observable<ProdutoCarrinhoDTO[]> {
         let parametros: HttpParams = new HttpParams();
         parametros = parametros.append('codigoCliente', codigoCliente + '');
@@ -58,7 +52,5 @@ export class ProdutoCarrinhoService {
         }
         return this.requisicaoHttpService.Delete<void>(this.configuracaoAuxiliarService.getContextoSistema() + 'produtos-carrinho', {params: parametros}, loader);
     }
-
-
 
 }

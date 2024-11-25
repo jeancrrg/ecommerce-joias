@@ -11,6 +11,7 @@ import { MenuBarModule } from "src/app/shared/components/menu-bar/menu-bar.modul
 import { BreadcrumbModule } from "primeng/breadcrumb";
 import { ResumoCompraModule } from "src/app/shared/components/resumo-compra/resumo-compra.module";
 import { InputTextModule } from "primeng/inputtext";
+import { InputMaskModule } from "primeng/inputmask";
 
 @NgModule({
     declarations: [ConfirmacaoDadosComponent],
