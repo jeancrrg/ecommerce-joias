@@ -1,0 +1,60 @@
+<header [quantidadeItensCarrinho]="1" [mostrarBarraPesquisa]="false"></header>
+
+<menu-bar></menu-bar>
+
+<div class="container-login">
+    <div class="card card-login">
+
+        <div class="buttonsForm">
+            <div class="btnColor"></div>
+            <button pButton pRipple label="Login"></button>
+            <button pButton pRipple label="Cadastro"></button>
+        </div>
+
+        <h3 class="label-login"> Acesse sua conta </h3>
+
+        <form class="forms-login">
+            <span class="p-float-label p-input-icon-left">
+                <i class="pi pi-envelope"></i>
+                <input type="text" id="email" pInputText [(ngModel)]="email" name="email" maxlength="50"/>
+                <label for="email"> Email </label>
+            </span>
+
+            <span class="p-float-label p-input-icon-left">
+                <i class="pi pi-lock"></i>
+                <p-password id="senha" name="senha"
+                    [(ngModel)]="senha"
+                    [toggleMask]="true"
+                    promptLabel="A senha deve conter letras, caracteres e números"
+                    weakLabel="Muito fraca"
+                    mediumLabel="Média"
+                    strongLabel="Segura"
+                    maxlength="15"
+                    inputId="senha"
+                    styleClass="w-full">
+
+                    <ng-template pTemplate="footer">
+                        <p-divider />
+                        <p class="mt-2"> Sugestões </p>
+                        <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                            <li> Pelo menos uma letra maiúscula </li>
+                            <li> Pelo menos uma letra minúscula </li>
+                            <li> Pelo menos um número </li>
+                            <li> Mínimo de 8 caracteres </li>
+                        </ul>
+                    </ng-template>
+                </p-password>
+                <label for="senha"> Senha </label>
+            </span>
+
+            <div class="label-esqueci-senha">
+                <a> Esqueci minha senha </a>
+            </div>
+
+            <button pButton pRipple label="ENTRAR" icon="pi pi-sign-in" class="btn-login"></button>
+        </form>
+
+
+
+    </div>
+</div>

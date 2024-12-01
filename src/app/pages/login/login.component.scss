@@ -1,0 +1,87 @@
+.container-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .card-login {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 30rem;
+        min-width: 27rem;
+        margin: 2rem 0;
+        padding: 3rem;
+        box-shadow: 0 0 15px 0 var(--cor-para-sombra);
+
+        .buttonsForm {
+            margin-top: 1rem;
+            position: relative;
+            border-radius: 30px;
+            box-shadow: 0 0 7px 0 var(--secundary-color);
+
+            button {
+                background: transparent;
+                border: none;
+                position: relative;
+                padding: 10px 29px;
+            }
+
+            .btnColor {
+                position: absolute;
+                width: 108px;
+                height: 100%;
+                background: linear-gradient(to right, var(--surface-600), var(--secundary-color));
+                border-radius: 30px;
+                transition: .3s;
+            }
+
+        }
+
+        .label-login {
+            text-align: center;
+            margin: 2rem 0;
+            font-family: var(--font-primary);
+        }
+
+        .forms-login {
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+
+            span {
+                margin-bottom: 2rem;
+            }
+
+            .p-input-icon-left i {
+                z-index: 1;
+            }
+        }
+
+        .label-esqueci-senha {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+
+            a {
+                color: var(--text-color);
+                text-decoration: underline;
+                text-decoration-skip-ink: none;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .btn-login {
+            width: 90%;
+            width: 100%;
+            padding: 0.8rem 6rem;
+            margin-bottom: 1rem;
+        }
+
+    }
+
+}
+
+
