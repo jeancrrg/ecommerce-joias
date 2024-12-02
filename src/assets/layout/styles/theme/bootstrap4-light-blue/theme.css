@@ -1360,6 +1360,7 @@
         border-color: var(--secundary-color-text);
     }
     .p-inputtext:enabled:focus {
+        padding-left: 2.5rem;
         outline: 0 none;
         outline-offset: 0;
         border-color: var(--secundary-color-text);

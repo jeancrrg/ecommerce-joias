@@ -5,56 +5,118 @@
 <div class="container-login">
     <div class="card card-login">
 
-        <div class="buttonsForm">
-            <div class="btnColor"></div>
-            <button pButton pRipple label="Login"></button>
-            <button pButton pRipple label="Cadastro"></button>
+        <div class="botoes-formulario">
+            <div class="botao-selecionado" [ngStyle]="{'transform': movimentacaoBotao}"></div>
+            <button pButton label="Login" (click)="mudarFormulario('login')" [class.active]="formularioAtual === 'login'"></button>
+            <button pButton label="Cadastro" (click)="mudarFormulario('cadastro')" [class.active]="formularioAtual === 'cadastro'"></button>
         </div>
 
-        <h3 class="label-login"> Acesse sua conta </h3>
+        <div class="container-formularios" [ngStyle]="{'transform': movimentacaoFormulario}">
 
-        <form class="forms-login">
-            <span class="p-float-label p-input-icon-left">
-                <i class="pi pi-envelope"></i>
-                <input type="text" id="email" pInputText [(ngModel)]="email" name="email" maxlength="50"/>
-                <label for="email"> Email </label>
-            </span>
+            <!-- FORMULÁRIO LOGIN -->
+            <div class="formulario-login">
+                <form class="formulario">
+                    <h3 class="label-formulario"> Acesse sua conta </h3>
 
-            <span class="p-float-label p-input-icon-left">
-                <i class="pi pi-lock"></i>
-                <p-password id="senha" name="senha"
-                    [(ngModel)]="senha"
-                    [toggleMask]="true"
-                    promptLabel="A senha deve conter letras, caracteres e números"
-                    weakLabel="Muito fraca"
-                    mediumLabel="Média"
-                    strongLabel="Segura"
-                    maxlength="15"
-                    inputId="senha"
-                    styleClass="w-full">
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-envelope"></i>
+                        <input id="emailLogin" name="emailLogin" type="text" pInputText [(ngModel)]="emailLogin" maxlength="50"/>
+                        <label for="emailLogin"> Email </label>
+                    </span>
 
-                    <ng-template pTemplate="footer">
-                        <p-divider />
-                        <p class="mt-2"> Sugestões </p>
-                        <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
-                            <li> Pelo menos uma letra maiúscula </li>
-                            <li> Pelo menos uma letra minúscula </li>
-                            <li> Pelo menos um número </li>
-                            <li> Mínimo de 8 caracteres </li>
-                        </ul>
-                    </ng-template>
-                </p-password>
-                <label for="senha"> Senha </label>
-            </span>
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-lock"></i>
+                        <p-password inputId="senhaLogin" name="senhaLogin"
+                            [(ngModel)]="senhaLogin"
+                            [toggleMask]="true"
+                            promptLabel="A senha deve conter letras, caracteres e números"
+                            weakLabel="Muito fraca"
+                            mediumLabel="Média"
+                            strongLabel="Segura"
+                            maxlength="15"
+                            styleClass="w-full">
 
-            <div class="label-esqueci-senha">
-                <a> Esqueci minha senha </a>
+                            <ng-template pTemplate="footer">
+                                <p-divider />
+                                <p class="mt-2"> Sugestões </p>
+                                <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                                    <li> Pelo menos uma letra maiúscula </li>
+                                    <li> Pelo menos uma letra minúscula </li>
+                                    <li> Pelo menos um número </li>
+                                    <li> Mínimo de 8 caracteres </li>
+                                </ul>
+                            </ng-template>
+                        </p-password>
+                        <label for="senhaLogin"> Senha </label>
+                    </span>
+
+                    <div class="label-esqueci-senha">
+                        <a> Esqueci minha senha </a>
+                    </div>
+
+                    <button pButton pRipple label="ENTRAR" icon="pi pi-sign-in" class="btn-formulario"></button>
+                </form>
             </div>
 
-            <button pButton pRipple label="ENTRAR" icon="pi pi-sign-in" class="btn-login"></button>
-        </form>
+            <!-- FORMULÁRIO CADASTRO -->
+            <div class="formulario-cadastro">
+                <form class="formulario">
+                    <h3 class="label-formulario"> Crie sua conta </h3>
 
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-user"></i>
+                        <input id="nomeCadastro" name="nomeCadastro" type="text" pInputText [(ngModel)]="nomeCadastro" maxlength="100"/>
+                        <label for="nomeCadastro"> Nome </label>
+                    </span>
 
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-phone"></i>
+                        <p-inputMask inputId="telefoneCadastro" name="telefoneCadastro" mask="(99) 99999-9999" [(ngModel)]="telefoneCadastro"></p-inputMask>
+                        <label for="telefoneCadastro"> Telefone </label>
+                    </span>
+
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-pencil"></i>
+                        <p-inputMask inputId="cpfCadastro" name="cpfCadastro" mask="999.999.999-99" [(ngModel)]="cpfCadastro"></p-inputMask>
+                        <label for="cpfCadastro"> CPF </label>
+                    </span>
+
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-envelope"></i>
+                        <input id="emailCadastro" name="emailCadastro" type="text" pInputText [(ngModel)]="emailCadastro" maxlength="50"/>
+                        <label for="emailCadastro"> Email </label>
+                    </span>
+
+                    <span class="p-float-label p-input-icon-left">
+                        <i class="pi pi-lock"></i>
+                        <p-password inputId="senhaCadastro" name="senhaCadastro"
+                            [(ngModel)]="senhaCadastro"
+                            [toggleMask]="true"
+                            promptLabel="A senha deve conter letras, caracteres e números"
+                            weakLabel="Muito fraca"
+                            mediumLabel="Média"
+                            strongLabel="Segura"
+                            maxlength="15"
+                            styleClass="w-full">
+
+                            <ng-template pTemplate="footer">
+                                <p-divider />
+                                <p class="mt-2"> Sugestões </p>
+                                <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                                    <li> Pelo menos uma letra maiúscula </li>
+                                    <li> Pelo menos uma letra minúscula </li>
+                                    <li> Pelo menos um número </li>
+                                    <li> Mínimo de 8 caracteres </li>
+                                </ul>
+                            </ng-template>
+                        </p-password>
+                        <label for="senhaCadastro"> Senha </label>
+                    </span>
+
+                    <button pButton pRipple label="CADASTRAR" icon="pi pi-sign-in" class="btn-formulario"></button>
+                </form>
+            </div>
+        </div>
 
     </div>
 </div>

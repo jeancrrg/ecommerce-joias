@@ -13,6 +13,7 @@ import { TooltipModule } from "primeng/tooltip";
 import { InputTextModule } from "primeng/inputtext";
 import { PasswordModule } from "primeng/password";
 import { DividerModule } from "primeng/divider";
+import { InputMaskModule } from "primeng/inputmask";
 
 @NgModule({
     declarations: [LoginComponent],
@@ -28,7 +29,8 @@ import { DividerModule } from "primeng/divider";
         TooltipModule,
         InputTextModule,
         PasswordModule,
-        DividerModule
+        DividerModule,
+        InputMaskModule
     ]
 })
 export class LoginModule {}
