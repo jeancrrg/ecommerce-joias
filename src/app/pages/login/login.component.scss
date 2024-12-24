@@ -1,3 +1,9 @@
+:host ::ng-deep {
+    .p-inputmask {
+        padding-left: 2.5rem;
+    }
+}
+
 .container-login {
     display: flex;
     justify-content: center;
@@ -43,19 +49,35 @@
             }
         }
 
-        .label-formulario {
-            text-align: center;
-            margin: 2rem 0;
-            font-family: var(--font-primary);
-        }
-
         .container-formularios {
             display: flex;
-            flex-direction: row;
             transition: 0.5s;
+            gap: 14rem;
 
-            .formulario-login {
-                margin-right: 10rem;
+            .formulario {
+                display: flex;
+                flex-direction: column;
+                width: 16rem;
+
+                span {
+                    margin-bottom: 1.5rem;
+                }
+
+                .p-input-icon-left i {
+                    z-index: 1;
+                }
+            }
+
+            .label-formulario {
+                text-align: center;
+                margin: 2rem 0;
+                font-family: var(--font-primary);
+            }
+
+            .btn-formulario {
+                width: 100%;
+                font-weight: bold;
+                padding: 0.7rem 2.5rem;
             }
 
             .label-esqueci-senha {
@@ -72,27 +94,6 @@
                         cursor: pointer;
                     }
                 }
-            }
-
-            .formulario {
-                display: flex;
-                flex-direction: column;
-                width: 90%;
-
-                span {
-                    margin-bottom: 1.5rem;
-                }
-
-                .p-input-icon-left i {
-                    z-index: 1;
-                }
-            }
-
-            .btn-formulario {
-                width: 90%;
-                width: 100%;
-                padding: 0.8rem 6rem;
-                font-weight: bold;
             }
         }
     }

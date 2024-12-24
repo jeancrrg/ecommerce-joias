@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NotificacaoService } from 'src/app/core/service/notificacao.service';
 
 @Component({
     selector: 'login',
@@ -9,18 +11,32 @@ export class LoginComponent implements OnInit {
 
     formularioAtual: string = 'login';
     movimentacaoBotao: string = 'translateX(0)';
-    movimentacaoFormulario: string = 'translateX(220px)';
+    movimentacaoFormulario: string = 'translateX(210px)';
 
     emailLogin: string;
     senhaLogin: string;
 
-    nomeCadastro: string;
-    telefoneCadastro: string;
-    cpfCadastro: string;
-    emailCadastro: string;
-    senhaCadastro: string;
+    nome: string;
+    telefone: string;
+    cpf: string;
+    email: string;
+    senha: string;
 
-    constructor() {}
+    // Nova forma de injeção de dependencia
+    private formBuilder: FormBuilder = inject(FormBuilder);
+    private notificacacaoService: NotificacaoService = inject(NotificacaoService);
+
+    protected formulario = this.formBuilder.group({
+        nome: [null, Validators.required],
+        telefone: [null, Validators.required],
+        cpf: [null, Validators.required],
+        email: [null, Validators.required],
+        senha: [null, [Validators.required,
+                        Validators.minLength(8),
+                        Validators.maxLength(15),
+                        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$')]
+        ]
+    });
 
     ngOnInit(): void {
 
@@ -29,7 +45,17 @@ export class LoginComponent implements OnInit {
     mudarFormulario(descricaoFormulario: string): void {
         this.formularioAtual = descricaoFormulario;
         this.movimentacaoBotao = descricaoFormulario === 'login' ? 'translateX(0)' : 'translateX(108px)';
-        this.movimentacaoFormulario = descricaoFormulario === 'login' ? 'translateX(220px)' : 'translateX(-180px)';
+        this.movimentacaoFormulario = descricaoFormulario === 'login' ? 'translateX(210px)' : 'translateX(-210px)';
+    }
+
+    acessarConta(): void {
+        console.log('form entrar: ', this.formulario);
+    }
+
+    cadastrar(): void {
+        if (this.formulario.invalid) {
+            this.notificacacaoService.aviso('Preencha todos os campos para se cadastrar!', 'AVISO', false, 10);
+        }
     }
 
 }

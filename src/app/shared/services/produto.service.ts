@@ -17,14 +17,20 @@ export class ProdutoService {
     ) { }
 
     buscar(codigo: number, nome: string, loader: boolean): Observable<ProdutoDTO[]> {
-        let parametros = new HttpParams();
+        let parametros: HttpParams = new HttpParams();
         if (ValidationUtils.isNotEmpty(codigo)) {
             parametros = parametros.append('codigo', codigo + '');
         }
         if (ValidationUtils.isNotEmpty(nome)) {
             parametros = parametros.append('nome', nome);
         }
-        return this.requisicaoHttpService.Get<ProdutoDTO[]>(this.configuracaoAuxiliarService.getContextoSistema() + 'produtos', {params: parametros}, loader, false, false);
+        return this.requisicaoHttpService.Get<ProdutoDTO[]>(this.configuracaoAuxiliarService.getContextoSistema() + 'produtos', { params: parametros }, loader, false, false);
+    }
+
+    buscarQuantidadeEstoque(codigoProduto: number, loader: boolean): Observable<number> {
+        let parametros: HttpParams = new HttpParams();
+        parametros = parametros.append('codigoProduto', codigoProduto + '');
+        return this.requisicaoHttpService.Get<number>(this.configuracaoAuxiliarService.getContextoSistema() + 'produtos/estoque', { params: parametros }, loader, false, false);
     }
 
 }

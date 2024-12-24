@@ -9,7 +9,7 @@ import { RippleModule } from 'primeng/ripple';
 import { RouterModule } from '@angular/router';
 import { BadgeModule } from 'primeng/badge';
 import { FormsModule } from '@angular/forms';
-import { ListboxModule } from 'primeng/listbox';
+import { OrderListModule } from 'primeng/orderlist';
 
 @NgModule({
     declarations: [HeaderComponent],
@@ -23,7 +23,8 @@ import { ListboxModule } from 'primeng/listbox';
         ButtonModule,
         RippleModule,
         RouterModule,
-        BadgeModule
+        BadgeModule,
+        OrderListModule
     ]
 })
 export class HeaderModule {}

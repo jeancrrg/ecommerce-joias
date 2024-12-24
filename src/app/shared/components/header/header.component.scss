@@ -1,4 +1,18 @@
-.layout-toolbar {
+:host ::ng-deep {
+
+    // Remove os botões de controle na lateral esquerda do orderlist
+    .p-orderlist .p-orderlist-controls {
+        display: none;
+    }
+
+    // Configura toolbar para se comportar de acordo com o orderlist
+    .p-toolbar {
+        align-items: normal;
+        flex-wrap: nowrap;
+    }
+}
+
+:host {
     border-bottom: 0.1rem solid var(--surface-0);
 
     .logo-toolbar {
@@ -20,12 +34,65 @@
     }
 
     .search {
-        .input-toolbar {
-            width: 300px;
+        flex-direction: column;
+
+        .input-search {
+            width: 30rem;
+            padding: 2rem 0 0.8rem 0;
 
             input {
                 border-top-right-radius: 0;
                 border-bottom-right-radius: 0;
+            }
+        }
+
+        .lista-produtos {
+            z-index: 1;
+            width: 30rem;
+
+            .produtos {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                flex-wrap: wrap;
+
+                .imagem-produto {
+                    width: 6rem;
+                    flex-shrink: 0;
+                    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.03), 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 2px 6px rgba(0, 0, 0, 0.12);
+                    border-radius: var(--border-radius);
+                }
+
+                .descricao-produto {
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1 1 0%;
+                    gap: 0.5rem;
+
+                    .nome-produto {
+                        font-weight: 500;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+
+                    .categoria-produto {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+
+                        i {
+                            font-size: 0.875rem;
+                        }
+                    }
+                }
+
+                .preco-produto {
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                }
             }
         }
     }

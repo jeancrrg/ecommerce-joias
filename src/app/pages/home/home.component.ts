@@ -59,12 +59,34 @@ export class HomeComponent implements OnInit {
         this.listaProdutosDTO = listaProdutos;
     }
 
-    adicionarAoCarrinho(produtoDTO: ProdutoDTO): void {
+    async adicionarAoCarrinho(produtoDTO: ProdutoDTO): Promise<void> {
+        const quantidadeEstoque: number = await this.buscarQuantidadeEstoque(produtoDTO.codigo);
+        if (produtoDTO.quantidadeEstoque < quantidadeEstoque) {
+            this.notificacaoService.aviso('Produto sem estoque!', 'AVISO', false, 10);
+        }
         if (!this.produtoJaEstaNoCarrinho(produtoDTO.codigo)) {
             this.listaCodigoProdutosCarrinho.push(produtoDTO.codigo);
         }
         const quantidadeParaAdicionar: number = 1;
         this.adicionar(produtoDTO.codigo, quantidadeParaAdicionar, this.codigoCliente);
+    }
+
+    async buscarQuantidadeEstoque(codigoProduto: number): Promise<number> {
+        return new Promise<number>((resolve, reject) => {
+            this.produtoService.buscarQuantidadeEstoque(codigoProduto, true).pipe(
+                tap((response) => {
+                    resolve(response);
+                }),
+                catchError((error) => {
+                    this.notificacaoService.erro(error.error, undefined, false, 10);
+                    reject(error);
+                    return of();
+                })
+            ).subscribe({
+                next: (response) => resolve(response),
+                error: (erro) => reject(erro)
+            });
+        });
     }
 
     produtoJaEstaNoCarrinho(codigoProduto: number): boolean {

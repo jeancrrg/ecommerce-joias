@@ -1,4 +1,4 @@
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { LoginComponent } from "./login.component";
 import { LoginRoutes } from "./login.routes";
 import { CommonModule } from "@angular/common";
@@ -30,7 +30,8 @@ import { InputMaskModule } from "primeng/inputmask";
         InputTextModule,
         PasswordModule,
         DividerModule,
-        InputMaskModule
+        InputMaskModule,
+        ReactiveFormsModule
     ]
 })
 export class LoginModule {}

@@ -1,4 +1,4 @@
-<p-toolbar class="layout-toolbar">
+<p-toolbar>
     <div class="p-toolbar-group-start">
         <a class="logo-toolbar" routerLink="">
             <img src="assets/layout/images/logo Pais & Filhos.png" alt="logo Pais e Filhos">
@@ -6,10 +6,34 @@
     </div>
 
     <div class="p-toolbar-group-center search" *ngIf="mostrarBarraPesquisa">
-        <p-inputGroup class="input-toolbar">
-            <input type="text" pInputText [(ngModel)]="filtroNomeProduto" class="p-inputtext" placeholder="Pesquise em toda loja..." uppercase maxlength="100" (keyup.enter)="pesquisar()">
+        <p-inputGroup class="input-search">
+            <input type="text" pInputText [(ngModel)]="filtroNomeProduto" placeholder="Pesquise em toda loja..."
+                class="p-inputtext" maxlength="100" (keyup.enter)="pesquisar()" (focus)="estaPesquisando = true" (blur)="estaPesquisando = false">
             <button pButton pRipple icon="pi pi-search" (click)="pesquisar()"></button>
         </p-inputGroup>
+
+        <p-orderList header="Produtos" [value]="listaProdutosDTO" class="lista-produtos" *ngIf="listaProdutosDTO.length > 0 && estaPesquisando">
+            <ng-template let-produto pTemplate="item">
+                <div class="produtos">
+                    <img [src]="produto.listaUrlImagens[0]" [alt]="produto.nome" class="imagem-produto"/>
+
+                    <div class="descricao-produto">
+                        <span class="nome-produto">{{ produto.nome }}</span>
+
+                        <div class="categoria-produto">
+                            <i class="pi pi-tag"></i>
+                            <span>
+                                {{ produto.nomeCategoria }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <span class="preco-produto">
+                        {{ produto.preco | currency: 'BRL':true:'1.2-2' }}
+                    </span>
+                </div>
+            </ng-template>
+        </p-orderList>
     </div>
 
     <div class="p-toolbar-group-end toolbar-buttons">

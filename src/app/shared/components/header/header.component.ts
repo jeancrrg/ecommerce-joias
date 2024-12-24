@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
 
     filtroNomeProduto: string;
     listaProdutosDTO: ProdutoDTO[] = [];
+    estaPesquisando: boolean = false;
 
     @Input() mostrarBarraPesquisa: boolean = true;
     @Input() quantidadeItensCarrinho: number;
@@ -33,6 +34,8 @@ export class HeaderComponent implements OnInit {
                 this.produtosPesquisados.emit(this.listaProdutosDTO);
                 if (ValidationUtils.isEmpty(this.listaProdutosDTO) || this.listaProdutosDTO.length == 0) {
                     this.notificacaoService.informacao('Nenhum produto encontrado!', 'INFORMAÇÃO', false, 10);
+                } else {
+                    this.listaProdutosDTO = this.listaProdutosDTO.slice(0, 6);
                 }
             }),
             catchError((error) => {
